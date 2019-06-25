@@ -11,6 +11,9 @@
 	<select id="select" resultType="boardVO">
 	select * from tbl_board2 where bno=#{bno}
 	</select>
+	<select id="selectPage" resultType="boardVO">
+	select *from tbl_board2 where bno > 0 order by bno desc limit #{skip} , #{amount}
+	</select>
 	<update id="update">
 	update tbl_board2 set title = #{title}, content = #{content} where bno = #{bno}
 	</update>
