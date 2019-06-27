@@ -25,37 +25,38 @@ public class BoardController {
 	private BoardService service;
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO vo,RedirectAttributes rttr) {
+	public String modify(BoardVO vo, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
 		service.modify(vo);
 		
 		rttr.addFlashAttribute("result","success");
-
-		return "redirect:/board/list";
+		
+		return "redirect:/board/list" + cri.getLink();
 	}
 	
 	
 	
 	
 	@GetMapping({"/read","/modify"})
-	public void read(@RequestParam("bno") Integer bno
-			,@ModelAttribute("cri") Criteria cri, Model model) {
+	public void read(@ModelAttribute("cri") Criteria cri, Model model) {
 		
-		log.info("bno :" + bno);
+		log.info("bno :" + cri.getBno());
 		
-		model.addAttribute("vo", service.get(bno));
+		model.addAttribute("vo", service.get(cri.getBno()));
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Integer bno, RedirectAttributes rttr) {
+	public String remove(@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
-		log.info("bno: " +bno);
+		log.info("bno: " +cri.getBno());
 		
-		int count = service.remove(bno);
+		int count = service.remove(cri.getBno());
 		
 		rttr.addFlashAttribute("result","success");
-
-		return "redirect:/board/list";
+		
+		cri.setPage(1);
+		
+		return "redirect:/board/list"+cri.getLink();
 	}
 	
 //	@GetMapping("/list")
@@ -66,9 +67,9 @@ public class BoardController {
 //	}
 	
 	@GetMapping("/list")
-	public void listPage(Criteria cri, Model model) {
+	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) {
 		
-		int totalCount = 201;
+		int totalCount = service.getListCount(cri);
 		
 		model.addAttribute("pm", new PageMaker(cri, totalCount));	
 		model.addAttribute("list", service.getList(cri));

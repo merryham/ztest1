@@ -58,4 +58,10 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.selectPage(cri);
 	}
 
+	@Override
+	public int getListCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.selectPageCount(cri);
+	}
+
 }

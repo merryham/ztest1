@@ -13,8 +13,11 @@
               <h6 class="m-0 font-weight-bold text-primary">Modify</h6>
             </div>
             <div class="card-body">
-            	<form id='form1' >
-            	
+            	<form id='form1' >        
+        			<input type="hidden" name="bno" value="${cri.bno}">
+            		<input type="hidden" name="page" value="${cri.page}">
+        			<input type="hidden" name="amount" value="${cri.amount}">
+   
             	<div class="form-group">
                     <input type="text" name='bno' class="form-control form-control-user"  placeholder="Bno"
                     	value='<c:out value="${vo.bno}"/>' readonly="readonly">
