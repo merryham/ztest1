@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,29 @@ public class BoardMapperTests {
 	BoardMapper mapper;
 	
 	@Test
+	public void testMap() {
+		String type ="TCW";
+		String keyword = "홍길동";
+		
+		if(type == null ||type.trim().length() ==0) {
+			
+		}
+		
+		String[] arr=type.split("");
+		
+		log.info(Arrays.toString(arr));
+		
+		Map<String, String> map = new HashMap<>();
+		
+		for(String word: arr){
+			map.put(word, keyword);
+			
+		}
+		log.info(map);
+	}
+	
+	
+	@Test
 	public void testSearch() {
 		Map<String, String> map = new HashMap<>();
 		map.put("T", "샘플");
@@ -36,7 +60,9 @@ public class BoardMapperTests {
 		
 		//1page, 10
 		Criteria cri = new Criteria();
-		cri.setPage(2);
+		cri.setPage(50);
+		cri.setType("TCW");
+		cri.setKeyword("user00");
 		
 		mapper.selectPage(cri).forEach(vo -> log.info(vo));
 	}

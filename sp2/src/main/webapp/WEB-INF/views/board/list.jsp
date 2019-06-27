@@ -14,10 +14,19 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">List Page</h6>
+              <select name="typeView">
+        	 	<option value="">--</option>
+        	 	<option value="T" ${cri.type == 'T'? "selected" :""}>제목</option>
+        	 	<option value="C" ${cri.type == 'C'? "selected" :""}>내용</option>
+        	 	<option value="W" ${cri.type == 'W'? "selected" :""}>작성자</option>
+        	 	<option value="TC" ${cri.type == 'TC'? "selected" :""}>제목+내용</option>
+        	  </select>
+        	 <input type='text' name='keywordView' value="${cri.keyword}">
+        	 <button class="btn btn-primary serachBtn">Search</button>
               <select class="opt">
-              <option value="10" ${cri.amount == 10? "selected":"" }>10</option>
-              <option value="20" ${cri.amount == 20? "selected":"" }>20</option>
-              <option value="50" ${cri.amount == 50? "selected":"" }>50</option>
+              	<option value="10" ${cri.amount == 10? "selected":"" }>10</option>
+              	<option value="20" ${cri.amount == 20? "selected":"" }>20</option>
+              	<option value="50" ${cri.amount == 50? "selected":"" }>50</option>
               </select>
             </div>
             <div class="card-body">
@@ -45,7 +54,7 @@
 			    	</c:if>
 			    	
 			    <c:forEach begin="${pm.start}" end="${pm.end }" var="idx">
-			    <li class="page-item"><a class="page-link" href='${idx}'>${idx}</a></li>
+			    <li class="page-item ${pm.current==idx? "active":""}"><a class="page-link" href='${idx}'>${idx}</a></li>
 			    </c:forEach>
 			    
 			    <c:if test="${pm.next}">
@@ -63,6 +72,9 @@
         <form id= "actionForm" action="/board/list" method="get">
         	<input type="hidden" name="page" value="${cri.page}">
         	<input type="hidden" name="amount" value="${cri.amount}">
+          	<input type="hidden" name="type" value="${cri.type}">
+          	<input type="hidden" name="keyword" value="${cri.keyword}">
+        	
         </form>
  
  <script>
@@ -75,6 +87,26 @@
  
  var actionForm = $("#actionForm");
 
+ $(".serachBtn").on("click", function(e){
+ 	
+	 var keyword = $("input[name='keywordView']");
+	 
+	 var keywordValue = keyword.val();
+	 
+	 if(keywordValue.trim().length == 0){
+		 alert("검색어를 제대로 입력해");
+		 return;
+	 }
+	 
+	 $("input[name='keyword']").val(keywordValue);
+	 $("input[name='page']").val(1);
+	 
+	 var selectValue = $("select[name='typeView']").val();
+	 
+	 $("input[name='type']").val(selectValue);
+	 actionForm.submit();
+ });
+ 
  $(".page-link").on("click", function(e){
 	
 	 e.preventDefault();
