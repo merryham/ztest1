@@ -72,6 +72,15 @@ $('.btn-warning').on("click",function(){
 	 	.attr("method","post")
 	 	.submit();
 });
+$('.btn-secondary').on("click",function(e){
+	 e.preventDefault();
+	 var formObj = $("#form1");
+	 formObj.find("input[name='bno']").remove();
+	 formObj
+	 	.attr("action","/board/list")
+	 	.attr("method","get")
+	 	.submit();
+});
 </script>
          
 <%@include file="../includes/footer.jsp" %>
