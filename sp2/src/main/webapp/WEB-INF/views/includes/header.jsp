@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -331,3 +330,7 @@
         <!-- End of Topbar -->
         
           <script src="/resources/vendor/jquery/jquery.min.js"></script>
+           <!-- Bootstrap core JavaScript-->
+
+  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+          
