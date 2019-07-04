@@ -78,6 +78,7 @@
         </div>
         <div class="modal-body">
         	<input type="text" class="form-control mbno" name="bno" value="${vo.bno}" readonly="readonly">
+        	<input type="text" class="form-control mrno" name="rno" value='' readonly="readonly">
 			<input type="text" class="form-control" name="reply" value="samplereply">
 			<input type="text" class="form-control" name="replyer" value="도라에몽">
         </div>
@@ -117,7 +118,7 @@
 		 console.log("---------------------")
 		 console.log(reply)
 		 
-		 $(".mbno").val(reply.rno);
+		 $(".mrno").val(reply.rno);
 		 $("input[name='reply']").val(reply.reply);
 		 $("input[name='replyer']").val(reply.replyer);
 		 
@@ -161,7 +162,22 @@
 
      });
 
+ });
+ 
+ $(".deleteBtn").on("click", function(e){
+	
+	 var rno = $("input[name='rno']").val();
+	 
+	 alert(rno);
+	 
+	  replyService.removeReply(rno, function(){
+		 alert("removed....");
+         $("#replyModal").modal('hide')
+		 showPage();
+	 }) 
+	 
  })
+ 
      function showPage(){
 
         replyList.html("")

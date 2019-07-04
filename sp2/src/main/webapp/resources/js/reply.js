@@ -7,6 +7,18 @@ var replyService = (function (){
     function conuntUp() {
         return ++idx;
     }
+    
+    function removeReply(rno, callback){
+    	 $.ajax({
+             type : "delete",
+             url : host+rno,
+             success : function () {
+                 if(callback){
+                     callback();
+                 }
+             }
+         })
+    }
 
     function addReply(obj, callback) {
         $.ajax({
@@ -43,6 +55,7 @@ var replyService = (function (){
     }
     
     return {
+    	removeReply: removeReply,
     	getReply: getReply,
         getList: getList,
         countUp:conuntUp,
