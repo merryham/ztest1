@@ -7,7 +7,8 @@
 		
 		<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
 		<bean id="customLogoutSuccess" class="org.zerock.security.CustomLogoutSuccessHandler"></bean>
-		
+		<bean id="customPasswordEncoder" class="org.zerock.security.CustomPasswordEncoder"></bean>
+
 <security:http>
 
 	<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
@@ -21,7 +22,7 @@
 </security:http>
 
 
-<security:authentication-manager>
+<!-- <security:authentication-manager>
 	<security:authentication-provider>
       <security:user-service>
         <security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
@@ -29,6 +30,13 @@
       </security:user-service>
     </security:authentication-provider>
 </security:authentication-manager>
-	
-	
+	 -->
+	 
+<security:authentication-manager>
+    <security:authentication-provider>
+      <security:jdbc-user-service data-source-ref="dataSource" />
+      <security:password-encoder ref="customPasswordEncoder"/>
+    </security:authentication-provider>
+</security:authentication-manager>	
+  
 </beans>
