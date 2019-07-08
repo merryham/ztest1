@@ -20,7 +20,12 @@ public class CustomPasswordEncoder implements PasswordEncoder {
 		
 		log.info("RAW : " + rawPassword);
 		log.info("EN : " + encodedPassword);
-		return true;
+		
+		if(rawPassword==null || encodedPassword==null) {
+			return false;
+		}
+
+		return rawPassword.equals(encodedPassword);
 	}
 
 }

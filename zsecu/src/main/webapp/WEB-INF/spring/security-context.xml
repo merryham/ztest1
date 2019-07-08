@@ -8,11 +8,14 @@
 		<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
 		<bean id="customLogoutSuccess" class="org.zerock.security.CustomLogoutSuccessHandler"></bean>
 		<bean id="customPasswordEncoder" class="org.zerock.security.CustomPasswordEncoder"></bean>
-
+		<bean id="CustomLoginFailureHandler" class="org.zerock.security.CustomLoginFailureHandler"></bean>
 <security:http>
 
-	<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+	<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess" authentication-failure-handler-ref="CustomLoginFailureHandler"/>
 	<security:logout logout-url="/customLogout" success-handler-ref="customLogoutSuccess" />
+	
+	
+
     
 	<security:intercept-url pattern="/sample/all" access="permitAll"/>
     <security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
