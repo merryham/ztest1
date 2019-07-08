@@ -21,4 +21,10 @@ public class CommonController {
 		
 		log.info("custom login page");
 	}
+	
+	@GetMapping("/customLogout")
+	public void customLogout() {
+		
+		log.info("custom logout.....");
+	}
 }
