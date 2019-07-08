@@ -11,7 +11,7 @@
 <body>
   
   <h1>Custom Login Page</h1>
-  <h2><c:out value="${error}"/></h2>
+  <h2><c:out value='${param.error == "v1"?"아이디가 일치하지 않습니다.":""}'/></h2>
   <h2><c:out value="${logout}"/></h2>
   
   <form method='post' action="/login">
